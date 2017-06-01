@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>API Id's</title>
+	
+	
+	<script type="text/javascript">
+	</script>
+	<script type="text/javascript" 
+			src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js">
+	</script> 
+
+	<script type="text/javascript">
+		$(document).ready(function(){
+			var endpoint = 'https://www.anapioficeandfire.com/api/houses/'
+			N = 446; // ish
+			$('body').append('{');
+			for(var i=1;i<N;i++){
+				link = endpoint+i;
+				//console.log(link);
+				$.ajax({
+					url: link,
+					success: function(res){
+						//console.log(res);
+						$('body').append(
+							'"'+res.name+'":'+i+",<br>");
+					},
+					dataType: 'json',
+					async: false, // use Synchronous otherwise value of looping variable i changes
+					method: 'GET'
+				});
+
+			}
+			$('body').append('"":'+i+"<br>");
+			$('body').append('}');
+		})
+
+	</script>
+
+</head>
+
+<body>
+	
+</body>
+</html>
