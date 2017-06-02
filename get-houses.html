@@ -13,26 +13,27 @@
 	<script type="text/javascript">
 		$(document).ready(function(){
 			var endpoint = 'https://www.anapioficeandfire.com/api/houses/'
-			N = 446; // ish
-			$('body').append('{');
-			for(var i=1;i<N;i++){
+			N = 444; // found by trial and error
+			for(var i=1;i<=N;i++){
 				link = endpoint+i;
-				//console.log(link);
+				
 				$.ajax({
 					url: link,
 					success: function(res){
 						//console.log(res);
+						urlparts = res.url.split('/');
+						id = urlparts[urlparts.length-1];
 						$('body').append(
-							'"'+res.name+'":'+i+",<br>");
+							'"'+res.name+'":'+id+",<br>");
+						
 					},
 					dataType: 'json',
-					async: false, // use Synchronous otherwise value of looping variable i changes
+					async: true, // turn this to false if you want them to be sorted
 					method: 'GET'
 				});
 
 			}
-			$('body').append('"":'+i+"<br>");
-			$('body').append('}');
+
 		})
 
 	</script>
